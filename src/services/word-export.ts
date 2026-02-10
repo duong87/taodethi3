@@ -231,17 +231,20 @@ export const exportToWord = async (examData: ExamData) => {
           { type: 'left', position: TAB_SPACING * 3 }     // Tab cho D
         ],
         children: [
-          new TextRun({ text: "A. ", bold: true, font: DEFAULT_FONT, size: DEFAULT_SIZE }),
-          new TextRun({ text: formatText(q.options.A), font: DEFAULT_FONT, size: DEFAULT_SIZE }),
+          new TextRun({ text: "A.", bold: true, font: DEFAULT_FONT, size: DEFAULT_SIZE }),
+          new TextRun({ text: " " + formatText(q.options.A), font: DEFAULT_FONT, size: DEFAULT_SIZE }),
 
-          new TextRun({ text: "\tB. ", bold: true, font: DEFAULT_FONT, size: DEFAULT_SIZE }),
-          new TextRun({ text: formatText(q.options.B), font: DEFAULT_FONT, size: DEFAULT_SIZE }),
+          new TextRun({ text: "\t", font: DEFAULT_FONT, size: DEFAULT_SIZE }),
+          new TextRun({ text: "B.", bold: true, font: DEFAULT_FONT, size: DEFAULT_SIZE }),
+          new TextRun({ text: " " + formatText(q.options.B), font: DEFAULT_FONT, size: DEFAULT_SIZE }),
 
-          new TextRun({ text: "\tC. ", bold: true, font: DEFAULT_FONT, size: DEFAULT_SIZE }),
-          new TextRun({ text: formatText(q.options.C), font: DEFAULT_FONT, size: DEFAULT_SIZE }),
+          new TextRun({ text: "\t", font: DEFAULT_FONT, size: DEFAULT_SIZE }),
+          new TextRun({ text: "C.", bold: true, font: DEFAULT_FONT, size: DEFAULT_SIZE }),
+          new TextRun({ text: " " + formatText(q.options.C), font: DEFAULT_FONT, size: DEFAULT_SIZE }),
 
-          new TextRun({ text: "\tD. ", bold: true, font: DEFAULT_FONT, size: DEFAULT_SIZE }),
-          new TextRun({ text: formatText(q.options.D), font: DEFAULT_FONT, size: DEFAULT_SIZE }),
+          new TextRun({ text: "\t", font: DEFAULT_FONT, size: DEFAULT_SIZE }),
+          new TextRun({ text: "D.", bold: true, font: DEFAULT_FONT, size: DEFAULT_SIZE }),
+          new TextRun({ text: " " + formatText(q.options.D), font: DEFAULT_FONT, size: DEFAULT_SIZE }),
         ]
       }));
     });
@@ -271,6 +274,21 @@ export const exportToWord = async (examData: ExamData) => {
       examChildren.push(new Paragraph({ alignment: AlignmentType.JUSTIFIED, spacing: { before: 120, after: 120 }, children: [new TextRun({ text: `${q.id} (${q.points}). `, bold: true, font: DEFAULT_FONT, size: DEFAULT_SIZE }), new TextRun({ text: formatText(q.question), font: DEFAULT_FONT, size: DEFAULT_SIZE })] }));
     });
   }
+
+  // Footer
+  examChildren.push(
+    new Paragraph({
+      alignment: AlignmentType.CENTER,
+      spacing: { before: 400, after: 120 },
+      children: [new TextRun({ text: "------------------ HẾT ------------------", bold: true, font: DEFAULT_FONT, size: DEFAULT_SIZE })]
+    }),
+    new Paragraph({
+      alignment: AlignmentType.CENTER,
+      spacing: { before: 0, after: 0 },
+      children: [new TextRun({ text: "(Thí sinh không được sử dụng tài liệu. Cán bộ coi thi không giải thích gì thêm)", italics: true, font: DEFAULT_FONT, size: 22 })] // Size 22 = 11pt, slightly smaller
+    })
+  );
+
   sections.push({ children: examChildren });
 
   // 4. ĐÁP ÁN
