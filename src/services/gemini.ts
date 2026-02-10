@@ -31,8 +31,10 @@ YÊU CẦU:
 1. Năng lực toán học: Phải gán đúng năng lực đặc trưng của môn học.
 2. Mặc định tên trường: Luôn để school_name là "THCS Thị trấn Gia Lộc".
 3. YÊU CẦU ĐẶC BIỆT CHO PHẦN 2 (ĐÚNG/SAI):
-   - MỖI CÂU HỎI BẮT BUỘC PHẢI CÓ ĐỦ 4 Ý NHỎ (a, b, c, d).
-   - CÁC Ý a, b, c, d PHẢI ĐƯỢC SẮP XẾP THEO MỨC ĐỘ NHẬN THỨC TĂNG DẦN.
+   - MỖI CÂU HỎI PHẢI CÓ MỘT ĐOẠN VĂN/BỐI CẢNH DẪN NHẬP CHUNG CHO CẢ 4 Ý a, b, c, d. 
+   - 4 ý a, b, c, d phải khai thác các khía cạnh khác nhau của cùng một vấn đề/bài toán đó.
+   - CÁC Ý a, b, c, d PHẢI ĐƯỢC SẮP XẾP THEO MỨC ĐỘ NHẬN THỨC TĂNG DẦN (a: Nhận biết -> d: Vận dụng cao).
+   - TUYỆT ĐỐI KHÔNG ĐƯỢC THIẾU Ý NÀO.
 `;
 
 /**
@@ -70,7 +72,7 @@ export const generateExam = async (params: any, apiKey: string): Promise<any> =>
   3. BẮT BUỘC dùng double-backslash (\\\\) cho mọi lệnh LaTeX trong JSON.
   3. Năm học 2025-2026. 
   4. Tên trường: THCS Thị trấn Gia Lộc.
-  5. Câu hỏi Đúng Sai bắt buộc phải có 4 ý a,b,c,d với mức độ khó tăng dần.`;
+  5. Câu hỏi Đúng Sai bắt buộc phải có ngữ cảnh chung và 4 ý a,b,c,d với mức độ khó tăng dần.`;
 
   if (isRegularExam) {
     prompt += `
