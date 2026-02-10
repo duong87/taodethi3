@@ -54,7 +54,8 @@ const App: React.FC = () => {
             setActiveTab(examType === EXAM_TYPES.REGULAR ? 0 : 2);
         } catch (error) {
             console.error("Failed to generate exam:", error);
-            alert("Có lỗi xảy ra trong quá trình tạo đề. Vui lòng thử lại.");
+            const errorMessage = error instanceof Error ? error.message : "Lỗi không xác định";
+            alert(`Có lỗi xảy ra: ${errorMessage}\nVui lòng thử lại hoặc kiểm tra console.`);
         } finally {
             setIsLoading(false);
         }
