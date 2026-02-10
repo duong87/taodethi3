@@ -58,10 +58,10 @@ export const exportToWord = async (examData: ExamData) => {
       verticalAlign: VerticalAlign.CENTER,
       rowSpan,
       columnSpan: colSpan,
-      children: [new Paragraph({ 
-        alignment, 
-        spacing: { before: 0, after: 0 }, 
-        children: [new TextRun({ text: formatText(text), bold, font: DEFAULT_FONT, size: DEFAULT_SIZE })] 
+      children: [new Paragraph({
+        alignment,
+        spacing: { before: 0, after: 0 },
+        children: [new TextRun({ text: formatText(text), bold, font: DEFAULT_FONT, size: DEFAULT_SIZE })]
       })]
     });
   };
@@ -209,35 +209,39 @@ export const exportToWord = async (examData: ExamData) => {
   if (exam_content.part_1 && exam_content.part_1.length > 0) {
     examChildren.push(new Paragraph({ alignment: AlignmentType.JUSTIFIED, spacing: { before: 120, after: 0 }, children: [new TextRun({ text: "Phần 1. Câu trắc nghiệm nhiều phương án chọn", bold: true, size: DEFAULT_SIZE, font: DEFAULT_FONT })] }));
     exam_content.part_1.forEach(q => {
-      examChildren.push(new Paragraph({ 
-        alignment: AlignmentType.JUSTIFIED, 
-        spacing: { before: 120, after: 0 }, 
+      examChildren.push(new Paragraph({
+        alignment: AlignmentType.JUSTIFIED,
+        spacing: { before: 120, after: 0 },
         children: [
-          new TextRun({ text: `${q.id}. `, bold: true, font: DEFAULT_FONT, size: DEFAULT_SIZE }), 
+          new TextRun({ text: `${q.id}. `, bold: true, font: DEFAULT_FONT, size: DEFAULT_SIZE }),
           new TextRun({ text: formatText(q.question), font: DEFAULT_FONT, size: DEFAULT_SIZE })
-        ] 
+        ]
       }));
 
       const INDENT_VALUE = 0.5 * CM_TO_TWIP; // 0.5cm
       const TAB_SPACING = 4.5 * CM_TO_TWIP; // 4.5cm
 
-      examChildren.push(new Paragraph({ 
+      examChildren.push(new Paragraph({
         alignment: AlignmentType.JUSTIFIED,
         spacing: { before: 60, after: 60 },
         indent: { left: INDENT_VALUE }, // Thụt lề A. vào 0.5cm
-        children: [
-          new TextRun({ text: `A. ${formatText(q.options.A)}`, font: DEFAULT_FONT, size: DEFAULT_SIZE }),
-          new TextRun({ text: `\tB. ${formatText(q.options.B)}`, font: DEFAULT_FONT, size: DEFAULT_SIZE }),
-          new TextRun({ text: `\tC. ${formatText(q.options.C)}`, font: DEFAULT_FONT, size: DEFAULT_SIZE }),
-          new TextRun({ text: `\tD. ${formatText(q.options.D)}`, font: DEFAULT_FONT, size: DEFAULT_SIZE }),
-        ],
-        // Tab stops: Khoảng cách giữa các đáp án là 4.5cm
-        // Vị trí tab được tính từ lề trái thực tế của dòng (bao gồm phần lề 2.5cm + phần thụt 0.5cm)
-        // Trong docx-js, tab stops được tính từ lề của vùng văn bản (sau lề trang).
         tabStops: [
           { type: 'left', position: TAB_SPACING },        // Tab cho B
           { type: 'left', position: TAB_SPACING * 2 },    // Tab cho C
           { type: 'left', position: TAB_SPACING * 3 }     // Tab cho D
+        ],
+        children: [
+          new TextRun({ text: "A. ", bold: true, font: DEFAULT_FONT, size: DEFAULT_SIZE }),
+          new TextRun({ text: formatText(q.options.A), font: DEFAULT_FONT, size: DEFAULT_SIZE }),
+
+          new TextRun({ text: "\tB. ", bold: true, font: DEFAULT_FONT, size: DEFAULT_SIZE }),
+          new TextRun({ text: formatText(q.options.B), font: DEFAULT_FONT, size: DEFAULT_SIZE }),
+
+          new TextRun({ text: "\tC. ", bold: true, font: DEFAULT_FONT, size: DEFAULT_SIZE }),
+          new TextRun({ text: formatText(q.options.C), font: DEFAULT_FONT, size: DEFAULT_SIZE }),
+
+          new TextRun({ text: "\tD. ", bold: true, font: DEFAULT_FONT, size: DEFAULT_SIZE }),
+          new TextRun({ text: formatText(q.options.D), font: DEFAULT_FONT, size: DEFAULT_SIZE }),
         ]
       }));
     });
@@ -341,15 +345,15 @@ export const exportToWord = async (examData: ExamData) => {
     creator: "AI Exam Generator 2025",
     title: `Đề thi ${metadata.subject} Lớp ${metadata.grade}`,
     sections: sections.map(s => ({
-      properties: { 
-        page: { 
-          margin: { 
-            top: 1.5 * CM_TO_TWIP, 
-            right: 1.5 * CM_TO_TWIP, 
-            bottom: 1.5 * CM_TO_TWIP, 
-            left: 2.5 * CM_TO_TWIP 
-          } 
-        } 
+      properties: {
+        page: {
+          margin: {
+            top: 1.5 * CM_TO_TWIP,
+            right: 1.5 * CM_TO_TWIP,
+            bottom: 1.5 * CM_TO_TWIP,
+            left: 2.5 * CM_TO_TWIP
+          }
+        }
       },
       children: s.children
     }))
