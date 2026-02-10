@@ -96,8 +96,8 @@ export interface AnswerKey {
 
 export interface ExamData {
   metadata: ExamMetadata;
-  matrix_data: MatrixRow[];
-  specification_data: SpecRow[];
+  matrix_data?: MatrixRow[];
+  specification_data?: SpecRow[];
   exam_content: ExamContent;
   answer_key: AnswerKey;
 }

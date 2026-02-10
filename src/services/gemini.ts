@@ -41,15 +41,22 @@ YÊU CẦU:
  * Hàm hỗ trợ parse JSON an toàn hơn cho các trường hợp LaTeX bị thiếu escape backslash
  */
 const safeJsonParse = (str: string) => {
+  // 1. Remove markdown code blocks if present
+  let cleanStr = str.replace(/```json\s*/g, "").replace(/```\s*$/g, "").trim();
+  // Also remove simple code blocks
+  cleanStr = cleanStr.replace(/```/g, "").trim();
+
   try {
-    return JSON.parse(str);
+    return JSON.parse(cleanStr);
   } catch (e: any) {
     console.warn("Lỗi parse JSON lần 1, đang thử sửa lỗi backslash...");
-    const fixedStr = str.replace(/\\(?![/\\bfnrtu"'])/g, "\\\\");
+    // 2. Try to fix escaped characters
+    const fixedStr = cleanStr.replace(/\\(?![/\\bfnrtu"'])/g, "\\\\");
     try {
       return JSON.parse(fixedStr);
     } catch (e2) {
-      console.error("Không thể sửa lỗi JSON:", fixedStr);
+      console.error("Không thể sửa lỗi JSON. Raw:", str);
+      console.error("Fixed:", fixedStr);
       throw e;
     }
   }
