@@ -14,8 +14,9 @@ const Latex: React.FC<LatexProps> = ({ content, className = "" }) => {
   // 1. Chuyển đổi các chuỗi gạch chéo kép dư thừa do escape JSON (ví dụ \\frac -> \frac)
   // 2. Chuyển đổi \n (dạng text) thành ký tự xuống dòng thực tế
   let processedContent = content
-    .replace(/\\\\([a-zA-Z])/g, '\\$1') // Sửa lỗi double backslash cho các command
-    .replace(/\\delta/g, '\u03B4')     // Hỗ trợ một số ký tự đặc biệt nếu cần
+    .replace(/\\\\(\w)/g, '\\$1') // Sửa lỗi double backslash cho các command (vd: \\frac -> \frac)
+    .replace(/\\\\([{}])/g, '\\$1') // Sửa lỗi cho các ký tự ngoặc
+    .replace(/\\\\ /g, '\\ ')      // Sửa lỗi cho khoảng trắng
     .replace(/\\n/g, '\n');            // Chuyển ký tự xuống dòng text thành \n
 
   // Tách nội dung dựa trên các delimiter $...$ và $$...$$
@@ -62,7 +63,7 @@ const Latex: React.FC<LatexProps> = ({ content, className = "" }) => {
             return <span key={index} className="text-red-500">{part}</span>;
           }
         }
-        
+
         // Xử lý text thuần: giữ nguyên khoảng trắng và hỗ trợ xuống dòng <br/>
         return (
           <React.Fragment key={index}>

@@ -13,7 +13,7 @@ const ExamPaper: React.FC<Props> = ({ data, metadata, fullData }) => {
   return (
     <div className="w-full bg-white print:p-0 font-serif">
       <div className="flex justify-end mb-4 no-print gap-2">
-        <button 
+        <button
           onClick={() => fullData && exportToWord(fullData)}
           className="bg-blue-600 text-white px-3 py-1.5 rounded-lg text-xs flex items-center gap-2 hover:bg-blue-700 transition shadow-sm font-semibold"
         >
@@ -46,12 +46,12 @@ const ExamPaper: React.FC<Props> = ({ data, metadata, fullData }) => {
       <div className="mb-8">
         <h3 className="font-bold uppercase mb-2 text-md">PHẦN I. Câu trắc nghiệm nhiều phương án chọn</h3>
         <p className="italic mb-4 text-sm">Thí sinh trả lời từ câu 1 đến câu {data.part_1.length}. Mỗi câu hỏi thí sinh chỉ chọn một phương án.</p>
-        
+
         <div className="space-y-6">
           {data.part_1.map((q, idx) => (
             <div key={idx} className="page-break-inside-avoid">
               <p className="font-semibold text-sm leading-relaxed"><span className="font-bold">{q.id}.</span> <Latex content={q.question} /></p>
-              <div className="grid grid-cols-2 md:grid-cols-4 mt-2 gap-2 ml-4 text-sm">
+              <div className="grid grid-cols-2 md:grid-cols-4 mt-2 gap-2 ml-4 text-sm max-w-full">
                 {Object.entries(q.options).map(([key, val]) => (
                   <div key={key}>
                     <span className="font-bold">{key}.</span> <Latex content={val} />
@@ -68,7 +68,7 @@ const ExamPaper: React.FC<Props> = ({ data, metadata, fullData }) => {
         <div className="mb-8 page-break">
           <h3 className="font-bold uppercase mb-2 text-md">PHẦN II. Câu trắc nghiệm đúng sai</h3>
           <p className="italic mb-4 text-sm">Thí sinh trả lời các câu tiếp theo. Trong mỗi ý a), b), c), d) ở mỗi câu, thí sinh chọn đúng hoặc sai.</p>
-          
+
           <div className="space-y-8">
             {data.part_2.map((q, idx) => (
               <div key={idx} className="page-break-inside-avoid">
@@ -96,7 +96,7 @@ const ExamPaper: React.FC<Props> = ({ data, metadata, fullData }) => {
               <div key={idx} className="page-break-inside-avoid">
                 <p className="font-semibold text-sm"><span className="font-bold">{q.id}.</span> <Latex content={q.question} /></p>
                 <div className="mt-2 border-b border-dotted border-gray-400 w-full h-8 flex items-end">
-                   <span className="text-gray-300 text-xs italic">Đáp án: .......................................</span>
+                  <span className="text-gray-300 text-xs italic">Đáp án: .......................................</span>
                 </div>
               </div>
             ))}

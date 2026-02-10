@@ -29,8 +29,8 @@ const ExamResults: React.FC<ExamResultsProps> = ({
     const renderContent = () => {
         if (examType === EXAM_TYPES.PERIODIC) {
             switch (activeTab) {
-                case 0: return <MatrixTable data={examData.matrix_data} metadata={examData.metadata} fullData={examData} />;
-                case 1: return <SpecTable data={examData.specification_data} metadata={examData.metadata} fullData={examData} />;
+                case 0: return examData.matrix_data ? <MatrixTable data={examData.matrix_data} metadata={examData.metadata} fullData={examData} /> : <div className="p-4 text-center text-gray-500 italic">Không có dữ liệu Ma trận cho đề thi này</div>;
+                case 1: return examData.specification_data ? <SpecTable data={examData.specification_data} metadata={examData.metadata} fullData={examData} /> : <div className="p-4 text-center text-gray-500 italic">Không có dữ liệu Bản đặc tả cho đề thi này</div>;
                 case 2: return <ExamPaper data={examData.exam_content} metadata={examData.metadata} fullData={examData} />;
                 case 3: return <AnswerKeyView data={examData.answer_key} metadata={examData.metadata} fullData={examData} />;
                 default: return null;

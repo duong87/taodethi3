@@ -7,7 +7,9 @@ export const SUBJECTS = [
   'Tiếng Anh',
   'Lịch sử',
   'Địa lí',
-  'GDCD'
+  'GDCD',
+  'Công Nghệ',
+  'HĐTN-HN'
 ];
 
 export const GRADES = Array.from({ length: 12 }, (_, i) => String(i + 1));
