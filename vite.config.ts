@@ -18,6 +18,7 @@ export default defineConfig(({ mode }) => {
       alias: {
         '@': path.resolve(__dirname, './src'),
       }
-    }
+    },
+    base: '/taodethi3/', // Base URL cho GitHub Pages
   };
 });
