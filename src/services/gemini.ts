@@ -7,8 +7,13 @@ NHIỆM VỤ:
 Tạo dữ liệu JSON bao gồm: Ma trận, Bản đặc tả (NẾU ĐƯỢC YÊU CẦU), Đề thi và Hướng dẫn chấm chi tiết.
 
 QUY TẮC VỀ CÔNG THỨC TOÁN (QUAN TRỌNG):
-1. Sử dụng LaTeX đặt trong $ $. 
-2. TRONG JSON, MỌI DẤU GẠCH CHÉO NGƯỢC (\\) CỦA LATEX PHẢI ĐƯỢC ESCAPE THÀNH HAI DẤU (\\\\).
+1. CHỈ sử dụng LaTeX ($...$) cho các công thức toán học, biểu thức, phương trình, hoặc các ký hiệu toán học đặc biệt.
+2. TUYỆT ĐỐI KHÔNG sử dụng $...$ cho:
+   - Các chữ cái thông thường (ví dụ: "Gọi A là...", KHÔNG viết "Gọi $A$ là...").
+   - Các đơn vị đo lường cơ bản đi kèm số (ví dụ: "5cm", KHÔNG viết "$5cm$").
+   - Dấu câu hoặc từ ngữ tiếng Việt.
+3. BẮT BUỘC thêm khoảng trắng (space) TRƯỚC và SAU các dấu ngoặc (), [], {} (Ví dụ: " ... ( x + 1 ) ... ").
+4. Trong JSON, MỌI DẤU GẠCH CHÉO NGƯỢC (\\) CỦA LATEX PHẢI ĐƯỢC ESCAPE THÀNH HAI DẤU (\\\\).
    - Ví dụ: Hãy viết "\\\\frac{1}{2}" thay vì "\\frac{1}{2}". 
    - Phân số phải dùng lệnh \\\\frac{a}{b}, KHÔNG dùng a/b.
    - Nếu bạn viết "\\delta", JSON sẽ bị lỗi "Bad escaped character". Bạn PHẢI viết "\\\\delta".
@@ -60,8 +65,9 @@ export const generateExam = async (params: any, apiKey: string): Promise<any> =>
   - Số câu: Phần 1 (MC): ${params.questionConfig.p1.count}, Phần 2 (T/F): ${params.questionConfig.p2.count}, Phần 3 (Short): ${params.questionConfig.p3.count}, Tự luận: ${params.questionConfig.es.count}
   
   YÊU CẦU KỸ THUẬT:
-  1. Sử dụng LaTeX chuẩn cho các công thức (ví dụ: \\\\frac{a}{b}). 
-  2. BẮT BUỘC dùng double-backslash (\\\\) cho mọi lệnh LaTeX trong JSON.
+  1. Sử dụng LaTeX chuẩn cho các công thức (ví dụ: \\\\frac{a}{b}). KHÔNG dùng $...$ cho chữ cái/văn bản thường.
+  2. BẮT BUỘC thêm khoảng trắng (space) TRƯỚC và SAU các dấu ngoặc (), [], {} để tránh lỗi dính chữ (Ví dụ: "tập hợp A = { 1; 2 }" thay vì "tập hợp A={1;2}").
+  3. BẮT BUỘC dùng double-backslash (\\\\) cho mọi lệnh LaTeX trong JSON.
   3. Năm học 2025-2026. 
   4. Tên trường: THCS Thị trấn Gia Lộc.
   5. Câu hỏi Đúng Sai bắt buộc phải có 4 ý a,b,c,d với mức độ khó tăng dần.`;
