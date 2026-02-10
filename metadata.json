@@ -1,0 +1,5 @@
+{
+  "name": "THCSTTGL-DETHI",
+  "description": "Ứng dụng Python Streamlit hỗ trợ giáo viên tạo đề thi chuyên sâu với quản lý quy trình và xuất Word.",
+  "requestFramePermissions": []
+}
